@@ -1,0 +1,12 @@
+[Unit]
+Description=Timer for Gnome Package Updater Notify
+
+PartOf=graphical-session.target
+
+[Timer]
+OnStartupSec=15m
+OnUnitActiveSec=2h
+RandomizedDelaySec=4h
+
+[Install]
+WantedBy=graphical-session.target

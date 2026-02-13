@@ -1,0 +1,24 @@
+#!/bin/bash -e
+
+notify() {
+  notify-send \
+    --app-name="Package Updater" \
+    --icon=system-software-update \
+    --action=default=update \
+    --hint=STRING:desktop-entry:org.gnome.PackageUpdater \
+    "Updates available" \
+    "Click to install"
+}
+
+if pkcon get-updates > /dev/null; then
+  action=$(notify)
+  if [[ "$action" = "default" ]]; then
+    gpk-update-viewer
+  fi
+else
+  exitCode=$?
+  if (( $exitCode != 5 )); then
+    echo >&2 "Unexpected pkcon exit code: ${exitCode}"
+    exit $exitCode
+  fi
+fi

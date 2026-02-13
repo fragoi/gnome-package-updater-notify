@@ -1,0 +1,6 @@
+## Binaries
+gnome-package-updater-notify usr/bin
+
+## Systemd
+gnome-package-updater-notify.service usr/lib/systemd/user
+gnome-package-updater-notify.timer usr/lib/systemd/user
