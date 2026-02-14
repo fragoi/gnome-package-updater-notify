@@ -5,8 +5,8 @@ PartOf=graphical-session.target
 
 [Timer]
 OnStartupSec=15m
-OnUnitActiveSec=2h
-RandomizedDelaySec=4h
+OnUnitActiveSec=6h
+RandomizedDelaySec=1h
 
 [Install]
 WantedBy=graphical-session.target
