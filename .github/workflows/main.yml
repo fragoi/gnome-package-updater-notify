@@ -1,0 +1,55 @@
+name: Create release
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - .github/**
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  V_FUNCS: version-deb
+  GIT_USER_NAME: Fra Bot
+  GIT_USER_EMAIL: fragoibot@gmail.com
+  DEBPACKAGE: gnome-package-updater-notify
+  DEBDIST: noble
+
+jobs:
+
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      new_version: ${{ steps.exportVersion.outputs.NEW_VERSION }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: fragoi/bash-actions@v2
+      - name: Create release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          createRelease
+      - name: Export version
+        id: exportVersion
+        run: |
+          outputSharedVars NEW_VERSION
+
+  notify-ppa:
+    needs: release
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    if: ${{ needs.release.outputs.new_version }}
+    steps:
+      - uses: fragoi/bash-actions@v2
+      - name: Notify PPA repository
+        env:
+          NEW_VERSION: ${{ needs.release.outputs.new_version }}
+          GITHUB_TOKEN: ${{ secrets.PPA_TOKEN }}
+        run: |
+          repositoryDispatch fragoi/ppa-publish \
+            -f event_type=native \
+            -f client_payload[package]="$DEBPACKAGE" \
+            -f client_payload[version]="$NEW_VERSION"
