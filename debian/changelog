@@ -1,5 +1,5 @@
-gnome-package-updater-notify (0.1.0) trixie; urgency=medium
+gnome-package-updater-notify (0.1.0) noble; urgency=medium
 
-  * initial draft
+  * initial version
 
- -- Fra Goi <fragoidev@gmail.com>  Fri, 13 Feb 2026 13:35:15 +0100
+ -- Fra Bot <fragoibot@gmail.com>  Fri, 13 Feb 2026 13:35:15 +0100
