@@ -1,3 +1,9 @@
+gnome-package-updater-notify (0.2.0) noble; urgency=medium
+
+  * refresh package cache
+
+ -- Fra Bot <fragoibot@gmail.com>  Mon, 02 Mar 2026 17:59:46 +0000
+
 gnome-package-updater-notify (0.1.0) noble; urgency=medium
 
   * initial version
