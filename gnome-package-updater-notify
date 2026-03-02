@@ -10,6 +10,8 @@ notify() {
     "Click to install"
 }
 
+pkcon refresh > /dev/null
+
 if pkcon get-updates > /dev/null; then
   action=$(notify)
   if [[ "$action" = "default" ]]; then
